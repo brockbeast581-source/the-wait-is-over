@@ -268,7 +268,7 @@ Thank you for being part of my life.
 <!-- MUSIC -->
 
 <audio id="music" loop>
-<source src="audio/song.mp3" type="audio/mpeg">
+<source src="song.mp3" type="audio/mpeg">
 </audio>
  <img id="cursorDuck" src="https://media.tenor.com/UGX5L0K6nVQAAAAi/cute-duck.gif"
 style="position:fixed;width:80px;pointer-events:none;z-index:999;">
@@ -289,16 +289,29 @@ duck.style.top=e.clientY+15+"px";
 // PAGES AND START BUTTON
 let pages = document.querySelectorAll(".page");
 let current = 0;
-const playBtn = document.querySelector(".playButton");
-const music = document.getElementById("music");
+window.onload = function() {
+    const music = document.getElementById("music");
+    const playBtn = document.querySelector(".playButton");
+    let pages = document.querySelectorAll(".page");
+    let current = 0;
 
-// START BUTTON CLICK
-playBtn.addEventListener("click", function () {
-    // 1️⃣ Play music first
-    music.play().catch(() => {
-        console.log("Autoplay blocked, click again.");
+    // START BUTTON CLICK
+    playBtn.addEventListener("click", function () {
+        // Try to play music
+        if (music) {
+            music.play().catch(() => {
+                console.log("Autoplay blocked, user interaction needed.");
+            });
+        }
+
+        // Go to next page
+        pages[current].classList.remove("active");
+        current++;
+        if (current < pages.length) {
+            pages[current].classList.add("active");
+        }
     });
-
+};
     // 2️⃣ Tiny delay before switching page
     setTimeout(() => {
         pages[current].classList.remove("active");
@@ -452,6 +465,7 @@ setInterval(createHeart,400)
 </body>
 
 </html>
+
 
 
 
