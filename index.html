@@ -114,7 +114,7 @@ font-size:18px;
 
 .sticker{
 position:fixed;
-width:70px;
+width:180px;
 pointer-events:none;
 animation:float 8s infinite ease-in-out;
 }
@@ -149,11 +149,10 @@ top:40%;
 
 <!-- FLOATING CUTE GIFS -->
 
-<img class="sticker" style="left:5%; top:20%;" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
-<img class="sticker" style="right:6%; top:15%;" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
-<img class="sticker" style="left:10%; bottom:10%;" src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
-<img class="sticker" style="right:10%; bottom:15%;" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
-
+<img class="sticker" style="left:5%;top:25%" src="https://media.tenor.com/7WkK9i4JbC0AAAAi/cute-bunny.gif">
+<img class="sticker" style="right:6%;top:20%" src="https://media.tenor.com/UGX5L0K6nVQAAAAi/cute-duck.gif">
+<img class="sticker" style="left:8%;bottom:10%" src="https://media.tenor.com/1n8Wnq7y8y0AAAAi/bunny-love.gif">
+<img class="sticker" style="right:8%;bottom:15%" src="https://media.tenor.com/4c6y9G1jH8EAAAAi/duck-dance.gif">
 
 <!-- INTRO PAGE -->
 
@@ -343,6 +342,21 @@ Thank you for being part of my life.
 <audio id="music" loop>
 <source src="song.mp3" type="audio/mpeg">
 </audio>
+ <img id="cursorDuck" src="https://media.tenor.com/UGX5L0K6nVQAAAAi/cute-duck.gif"
+style="position:fixed;width:80px;pointer-events:none;z-index:999;">
+
+<script>
+
+...your existing javascript...
+
+const duck=document.getElementById("cursorDuck");
+
+document.addEventListener("mousemove",function(e){
+
+duck.style.left=e.clientX+15+"px";
+duck.style.top=e.clientY+15+"px";
+
+});
 
 
 
@@ -351,8 +365,10 @@ Thank you for being part of my life.
 /* START BUTTON */
 
 function startSite(){
-
-document.getElementById("music").play()
+let music=document.getElementById("music")
+ if(music){
+  music.play().catch(()=>{})
+ }
 
 nextPage()
 
@@ -492,3 +508,4 @@ setInterval(createHeart,400)
 </body>
 
 </html>
+
