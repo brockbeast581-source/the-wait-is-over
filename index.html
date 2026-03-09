@@ -268,7 +268,7 @@ Thank you for being part of my life.
 <!-- MUSIC -->
 
 <audio id="music" loop>
-<source src="song.mp3" type="audio/mpeg">
+<source src="audio/song.mp3" type="audio/mpeg">
 </audio>
  <img id="cursorDuck" src="https://media.tenor.com/UGX5L0K6nVQAAAAi/cute-duck.gif"
 style="position:fixed;width:80px;pointer-events:none;z-index:999;">
@@ -294,20 +294,26 @@ const music = document.getElementById("music");
 
 // START BUTTON CLICK
 playBtn.addEventListener("click", function () {
-    if (music) {
-        music.play().catch(() => {
-            console.log("Autoplay blocked, user interaction needed.");
-        });
-    }
-    // GO TO NEXT PAGE
-    pages[current].classList.remove("active");
-    current++;
-    if (current < pages.length) {
-        pages[current].classList.add("active");
-        if (pages[current].querySelector("#typeText")) {
-            typeWriter();
+    // 1️⃣ Play music first
+    music.play().catch(() => {
+        console.log("Autoplay blocked, click again.");
+    });
+
+    // 2️⃣ Tiny delay before switching page
+    setTimeout(() => {
+        pages[current].classList.remove("active");
+        current++;
+        if (current < pages.length) {
+            pages[current].classList.add("active");
+            // Start typewriter if this page has it
+            if (pages[current].querySelector("#typeText")) {
+                typeWriter();
+            }
         }
-    }
+    }, 50); // 50ms delay ensures browser finishes click first
+
+    // 3️⃣ Disable the button so double-click doesn't break
+    playBtn.disabled = true;
 });
 
 /* PAGE CHANGE */
@@ -446,6 +452,7 @@ setInterval(createHeart,400)
 </body>
 
 </html>
+
 
 
 
