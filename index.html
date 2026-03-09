@@ -162,7 +162,7 @@ top:40%;
 
 <p>I made something special for your birthday</p>
 
-<button class="playButton" onclick="startSite()">▶ Play Music & Start</button>
+<button class="playButton">▶ Play Music & Start</button>
 
 </section>
 
@@ -286,22 +286,31 @@ duck.style.top=e.clientY+15+"px";
 });
 
 /* START BUTTON */
+// PAGES AND START BUTTON
+let pages = document.querySelectorAll(".page");
+let current = 0;
+const playBtn = document.querySelector(".playButton");
+const music = document.getElementById("music");
 
-function startSite(){
-let music=document.getElementById("music")
- if(music){
-  music.play().catch(()=>{})
- }
-
-nextPage()
-
-}
-
+// START BUTTON CLICK
+playBtn.addEventListener("click", function () {
+    if (music) {
+        music.play().catch(() => {
+            console.log("Autoplay blocked, user interaction needed.");
+        });
+    }
+    // GO TO NEXT PAGE
+    pages[current].classList.remove("active");
+    current++;
+    if (current < pages.length) {
+        pages[current].classList.add("active");
+        if (pages[current].querySelector("#typeText")) {
+            typeWriter();
+        }
+    }
+});
 
 /* PAGE CHANGE */
-
-let pages=document.querySelectorAll(".page")
-let current=0
 
 function nextPage(){
 pages[current].classList.remove("active");
@@ -437,6 +446,7 @@ setInterval(createHeart,400)
 </body>
 
 </html>
+
 
 
 
