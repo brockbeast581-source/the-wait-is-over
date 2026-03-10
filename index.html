@@ -270,7 +270,6 @@ Thank you for being part of my life.
 <audio id="music" loop>
 <source src="song.mp3" type="audio/mpeg">
 </audio>
- <button class="playButton">▶ Play Music & Start</button
  <img id="cursorDuck" src="https://media.tenor.com/UGX5L0K6nVQAAAAi/cute-duck.gif"
 style="position:fixed;width:80px;pointer-events:none;z-index:999;">
 
@@ -290,44 +289,25 @@ duck.style.top=e.clientY+15+"px";
 // PAGES AND START BUTTON
 let pages = document.querySelectorAll(".page");
 let current = 0;
-window.onload = function() {
-    const music = document.getElementById("music");
-    const playBtn = document.querySelector(".playButton");
-    let pages = document.querySelectorAll(".page");
-    let current = 0;
+const playBtn = document.querySelector(".playButton");
+const music = document.getElementById("music");
 
-    // START BUTTON CLICK
-    playBtn.addEventListener("click", function () {
-        // Try to play music
-        if (music) {
-            music.play().catch(() => {
-                console.log("Autoplay blocked, user interaction needed.");
-            });
+// START BUTTON CLICK
+playBtn.addEventListener("click", function () {
+    if (music) {
+        music.play().catch(() => {
+            console.log("Autoplay blocked, user interaction needed.");
+        });
+    }
+    // GO TO NEXT PAGE
+    pages[current].classList.remove("active");
+    current++;
+    if (current < pages.length) {
+        pages[current].classList.add("active");
+        if (pages[current].querySelector("#typeText")) {
+            typeWriter();
         }
-
-        // Go to next page
-        pages[current].classList.remove("active");
-        current++;
-        if (current < pages.length) {
-            pages[current].classList.add("active");
-        }
-    });
-};
-    // 2️⃣ Tiny delay before switching page
-    setTimeout(() => {
-        pages[current].classList.remove("active");
-        current++;
-        if (current < pages.length) {
-            pages[current].classList.add("active");
-            // Start typewriter if this page has it
-            if (pages[current].querySelector("#typeText")) {
-                typeWriter();
-            }
-        }
-    }, 50); // 50ms delay ensures browser finishes click first
-
-    // 3️⃣ Disable the button so double-click doesn't break
-    playBtn.disabled = true;
+    }
 });
 
 /* PAGE CHANGE */
