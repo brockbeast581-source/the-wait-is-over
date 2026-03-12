@@ -14,8 +14,6 @@ color:white;
 overflow:hidden;
 }
 
-/* PAGE SYSTEM */
-
 .page{
 position:absolute;
 width:100%;
@@ -34,8 +32,6 @@ padding:20px;
 opacity:1;
 }
 
-/* BUTTON */
-
 button{
 padding:12px 28px;
 border:none;
@@ -46,8 +42,6 @@ font-size:16px;
 cursor:pointer;
 margin-top:20px;
 }
-
-/* CUTE PLAY BUTTON */
 
 .playButton{
 background:#ff7aa2;
@@ -62,8 +56,6 @@ animation:pulse 1.5s infinite;
 50%{transform:scale(1.08)}
 100%{transform:scale(1)}
 }
-
-/* SLIDER */
 
 .slider{
 position:relative;
@@ -81,14 +73,10 @@ max-width:600px;
 line-height:1.6;
 }
 
-/* VIDEO */
-
 video{
 margin-top:20px;
 border-radius:10px;
 }
-
-/* HEARTS */
 
 .heart{
 position:fixed;
@@ -102,15 +90,11 @@ animation:fall 6s linear infinite;
 100%{transform:translateY(110vh)}
 }
 
-/* TYPEWRITER */
-
 #typeText{
 max-width:700px;
 line-height:1.7;
 font-size:18px;
 }
-
-/* CUTE FLOATING GIFS */
 
 .sticker{
 position:fixed;
@@ -124,8 +108,6 @@ animation:float 8s infinite ease-in-out;
 50%{transform:translateY(-20px)}
 100%{transform:translateY(0)}
 }
-
-/* MEMORY PAGE EXTRA STICKERS */
 
 .memorySticker{
 position:absolute;
@@ -147,14 +129,10 @@ top:40%;
 
 <body>
 
-<!-- FLOATING CUTE GIFS -->
-
 <img class="sticker" style="left:5%;top:25%" src="https://media.tenor.com/7WkK9i4JbC0AAAAi/cute-bunny.gif">
 <img class="sticker" style="right:6%;top:20%" src="https://media.tenor.com/UGX5L0K6nVQAAAAi/cute-duck.gif">
 <img class="sticker" style="left:8%;bottom:10%" src="https://media.tenor.com/1n8Wnq7y8y0AAAAi/bunny-love.gif">
 <img class="sticker" style="right:8%;bottom:15%" src="https://media.tenor.com/4c6y9G1jH8EAAAAi/duck-dance.gif">
-
-<!-- INTRO PAGE -->
 
 <section class="page active">
 
@@ -166,10 +144,6 @@ top:40%;
 
 </section>
 
-
-
-<!-- MEMORIES PAGE -->
-
 <section class="page">
 
 <h1>Our Memories 📸</h1>
@@ -178,15 +152,13 @@ top:40%;
 
 <img id="slide" src="photo1.jpg">
 
-<!-- CUTE MEMORY STICKERS -->
-
 <img class="memorySticker leftSticker"
 src="https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif">
 
 <img class="memorySticker rightSticker"
 src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
 
-<p id="caption">The beginning of our memories ❤️</p>
+<p id="caption"></p>
 
 </div>
 
@@ -195,10 +167,6 @@ src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
 <button onclick="nextPage()">Continue</button>
 
 </section>
-
-
-
-<!-- STORY PAGE -->
 
 <section class="page">
 
@@ -209,10 +177,6 @@ src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
 <button onclick="nextPage()">Next</button>
 
 </section>
-
-
-
-<!-- THINGS I LOVE PAGE -->
 
 <section class="page">
 
@@ -239,10 +203,6 @@ I love you — not the perfect version, but the real version of you 💘<br><br>
 
 </section>
 
-
-
-<!-- FINAL PAGE -->
-
 <section class="page">
 
 <h1>Happy 18th Birthday Aarthi 🎂</h1>
@@ -263,69 +223,48 @@ Thank you for being part of my life.
 
 </section>
 
-
-
-<!-- MUSIC -->
-
 <audio id="music" loop>
 <source src="song.mp3" type="audio/mpeg">
 </audio>
- <img id="cursorDuck" src="https://media.tenor.com/UGX5L0K6nVQAAAAi/cute-duck.gif"
+
+<img id="cursorDuck" src="https://media.tenor.com/UGX5L0K6nVQAAAAi/cute-duck.gif"
 style="position:fixed;width:80px;pointer-events:none;z-index:999;">
 
 <script>
 
-
 const duck=document.getElementById("cursorDuck");
 
 document.addEventListener("mousemove",function(e){
-
 duck.style.left=e.clientX+15+"px";
 duck.style.top=e.clientY+15+"px";
-
 });
 
-/* START BUTTON */
-// PAGES AND START BUTTON
-let pages = document.querySelectorAll(".page");
-let current = 0;
-const playBtn = document.querySelector(".playButton");
-const music = document.getElementById("music");
+let pages=document.querySelectorAll(".page");
+let current=0;
+const playBtn=document.querySelector(".playButton");
+const music=document.getElementById("music");
 
-// START BUTTON CLICK
-playBtn.addEventListener("click", function () {
-    if (music) {
-        music.play().catch(() => {
-            console.log("Autoplay blocked, user interaction needed.");
-        });
-    }
-    // GO TO NEXT PAGE
-    pages[current].classList.remove("active");
-    current++;
-    if (current < pages.length) {
-        pages[current].classList.add("active");
-        if (pages[current].querySelector("#typeText")) {
-            typeWriter();
-        }
-    }
+playBtn.addEventListener("click",function(){
+if(music){
+music.play().catch(()=>{});
+}
+pages[current].classList.remove("active");
+current++;
+if(current<pages.length){
+pages[current].classList.add("active");
+}
 });
-
-/* PAGE CHANGE */
 
 function nextPage(){
 pages[current].classList.remove("active");
 current++;
 if(current<pages.length){
 pages[current].classList.add("active");
- if (pages[current].querySelector("#typeText")) {
-    typeWriter();
+if(pages[current].querySelector("#typeText")){
+typeWriter();
 }
 }
 }
-
-
-
-/* MEMORY SLIDER */
 
 const photos=[
 "photo1.jpg",
@@ -338,37 +277,26 @@ const photos=[
 "photo8.jpg",
 "photo9.jpg",
 "photo10.jpg"
-]
+];
 
 const captions=[
 "After four long years, this moment finally became real. What started as a simple memory in 2022 slowly turned into something deeper and more meaningful. So many days passed, so many thoughts stayed unspoken, but somehow our paths found each other again. Holding her hand for the first time as lovers felt different, like everything had finally fallen into place. The wait, the memories, and the small moments all led to this day. From strangers who once just crossed paths to two hearts that now choose each other. Some stories take time, but that's what makes them special. 2025 became the year our story truly began",
-
-"10 November 2022 was just another normal day, or at least it felt like one at first. I didn’t know that one simple moment would stay in my mind for years. When I first saw her, she was just another person in the crowd, but somehow my eyes kept noticing her. There was something about that moment that felt different, even if I didn’t understand it then. I never imagined that the girl I saw that day would one day become someone so important in my life. Life has a funny way of turning small moments into big memories. What looked like a random day actually became the beginning of our story. Sometimes destiny starts quietly, without us realizing it",
-
-"11 November 2022 became another small but funny memory in our story. In that moment she was taking a picture, living her normal day, not knowing that I was actually there behind the scene. I was just standing in the background, watching quietly without realizing how meaningful that moment would become later. Back then it was just a simple coincidence, nothing more. But today when I look at this picture, it feels like destiny was already placing us in the same frame. Life is strange sometimes, the people who start as strangers slowly become the most important part of our lives. What was once just a background moment has now become a special memory. And now that same girl is not just in my life, she is my love",
-
-"Our first meet wasn’t simple, it felt like something straight out of a movie. I still remember sneaking into her college, carefully escaping the security just to see her for a few minutes. My heart was beating fast, half from fear and half from excitement. But the moment I saw her, everything else disappeared. We walked together that evening, talking, laughing, and enjoying every second like the world had paused just for us. That day gave me one of my favorite memories, the small bite mark she left during that meet. It was crazy, risky, and unforgettable at the same time. Looking back now, that moment feels like the true beginning of our story",
-
-"This picture reminds me of the day I traveled nearly 450 kilometers just to see her. I had a semester exam on Monday, but my heart said seeing her was more important than anything else. So on Sunday, I took the journey to Vijayawada without thinking twice. The travel was long and tiring, but the moment I saw her, every kilometer felt worth it. Sometimes love makes you do things that don’t make sense to others. But to me, that one day with her meant everything. Even with an exam waiting the next day, my mind was only happy that I got to see her smile. Some journeys are not about distance, they are about who you travel for",
-
-"This was one of those candid moments that perfectly captured how happy we were together. We were just talking, laughing, and enjoying the little time we had before I had to leave again. Neither of us wanted that moment to end, but time always moves faster when you’re with someone you love. Every joke, every smile, and every second felt special. It was the kind of happiness that comes from simply being together. Even though I knew I would soon have to leave, I tried to hold onto that moment as long as possible. That laughter in this picture is something I’ll always remember. Because sometimes the smallest moments become the most meaningful memories",
-
-"Our third meet in Hyderabad felt like a scene straight out of a movie. Both of our families were there in the same city, which made everything even more risky. We both told small lies at home just to find a way to meet each other secretly. My heart was full of excitement, fear, and happiness all at the same time. But the moment we met, all those worries slowly disappeared. That day also became special because it was the first time we shared our cinema theatre romance. Sitting next to each other, stealing small moments and smiles, felt magical. It was one of those memories that made our bond even stronger. Sometimes love grows the most in those hidden moments",
-
-"This picture reminds me of something very special for her. She always had a small insecurity about wearing a frock, something that made her hesitate for a long time. But slowly, with encouragement and motivation, she decided to try it for the first time. Seeing her walk confidently without fear that day made me so proud of her. She looked beautiful, but more than that, she looked happy and free. It wasn’t just about the dress, it was about her confidence growing. Watching her overcome that insecurity felt like a victory for both of us. That moment showed me how strong she really is. And to me, she looked absolutely perfect",
-
-"After knowing her for four years, this was the first time I saw her wearing a half saree. The moment I saw her, I was completely stunned and speechless. She looked so elegant, cute, and mesmerizing all at the same time. It felt like I was seeing her in a completely new light. Sometimes a single moment can make you fall in love all over again. That day was exactly like that for me. I couldn’t stop looking at her and smiling. She didn’t just look beautiful, she looked unforgettable. It was one of those moments that will stay in my memory forever",
-
-"This picture carries one of the most emotional memories for me. It was our last meet before we had to go our separate ways again for some time. She gave me a letter, something simple but full of her feelings. When I started reading it, my emotions became too heavy to control. Every word in that letter reminded me how much she means to me. I couldn’t stop my tears while reading it. It was a moment filled with love, sadness, and gratitude all at once. Sometimes love is not just about happy moments, it’s also about the tears we share. And that letter will always remain one of my most precious memories"
-
+"10 November 2022 was just another normal day...",
+"11 November 2022 became another small but funny memory in our story...",
+"Our first meet wasn’t simple, it felt like something straight out of a movie...",
+"This picture reminds me of the day I traveled nearly 450 kilometers just to see her...",
+"This was one of those candid moments that perfectly captured how happy we were together...",
+"Our third meet in Hyderabad felt like a scene straight out of a movie...",
+"This picture reminds me of something very special for her...",
+"After knowing her for four years, this was the first time I saw her wearing a half saree...",
+"This picture carries one of the most emotional memories for me..."
 ]
 
 let photoIndex=0
+document.getElementById("caption").innerText=captions[0]
 
 function nextSlide(){
-
 photoIndex++
-
 if(photoIndex>=photos.length){
 photoIndex=0
 }
@@ -382,61 +310,44 @@ img.src=photos[photoIndex]
 document.getElementById("caption").innerText=captions[photoIndex]
 img.style.opacity=1
 },400)
-
 }
 
-
-
-/* TYPEWRITER STORY */
-
 const story=`Happy 18th Birthday, Aarthi 🎂🎉
-When I first saw you on November 10, 2022, at your cousin’s wedding reception, it was around 4:10 in the evening. You had just finished your exam and walked into the marriage hall like it was any normal day for you… but for me, that moment quietly changed everything. The hall was full of lights ✨, music 🎶, relatives talking loudly, and people moving everywhere. Yet the second my eyes saw you, the entire world around me felt like it paused for a moment ⏳. I still remember that exact feeling — not dramatic like in movies, but a strange calm shock inside my heart. Something sparked instantly ⚡. Before that day I was honestly the kind of guy who joked around, acted like a Romeo, never taking feelings too seriously. But the moment I saw you, something inside me changed. It was like my heart suddenly decided, “This girl… she is different.” From that day on, without even realizing it, I slowly became a one-girl kind of person ❤️.
+When I first saw you on November 10, 2022, at your cousin’s wedding reception, it was around 4:10 in the evening. You had just finished your exam and walked into the marriage hall like it was any normal day for you… but for me, that moment quietly changed everything.
 
-Life after that wasn’t simple. For four long years I waited for you, mostly through small conversations, phone calls, messages, and quiet hope. During that time you even had a crush on someone else, and honestly that broke my heart in ways I didn’t even know were possible 💔. There were moments I felt like giving up, moments where I questioned myself, moments where everything felt pointless. But for some reason I couldn’t walk away. I didn’t know why I kept believing in us when there was no clear path, no trust at the beginning, no hope, no light, no guarantee that this story would ever work. Our relationship didn’t start with perfect conditions — it started blindly, with confusion, distance, and uncertainty. Yet somehow I still waited. I stayed. I believed that one day you might see what I felt for you.
+Life after that wasn’t simple. For four long years I waited for you, mostly through small conversations, phone calls, messages, and quiet hope. During that time you even had a crush on someone else, and honestly that broke my heart in ways I didn’t even know were possible.
 
-And then slowly, little by little, something beautiful happened. You started seeing me differently. You started understanding my heart. And one day you accepted my love — a moment that healed every second of those four years of waiting 🥹✨. That day our story truly began. Now we are not just two people with random memories… we are a couple, two hearts that chose each other despite everything.
+And then slowly, little by little, something beautiful happened. You started seeing me differently. You started understanding my heart. And one day you accepted my love — a moment that healed every second of those four years of waiting.
 
-Of course our journey hasn’t been easy. When our parents found out, they were scared and worried, and they told us to stop meeting, stop talking, stop loving each other. They wanted us to go separate ways. For a moment it felt like the world was trying to pull us apart 🌧️. But even through all that, one thing stayed strong — our hope. And I want you to remember this always: don’t worry, baby. I am with you. We will go through every problem together. We will fight through every difficult moment side by side. Right now things might feel uncertain, but time has a strange way of fixing what once felt impossible. One day our parents will understand us, one day they will see that our love is real, and one day everything will slowly fall into place 🤍.
+Of course our journey hasn’t been easy. When our parents found out, they were scared and worried, and they told us to stop meeting, stop talking, stop loving each other.
 
-Maybe today we are celebrating your birthday through a small surprise on a screen 💻🎁… but in the future it won’t just be this. One day I will be standing right next to you. We will celebrate your birthday together in real life. We will cut the cake 🎂, steal the first bite, laugh until our stomach hurts 😂, and take hundreds of silly photos together 📸. We will make memories that no camera can fully capture. And who knows… maybe our future will be full of our funny little versions too — tiny “chubby cheek” kids running around the house 😌, a cute duck 🦆 like you always wanted, maybe a playful dog 🐶 and a lazy cat 🐱 keeping us company while we live a peaceful, happy life together.
+Maybe today we are celebrating your birthday through a small surprise on a screen 💻🎁… but in the future it won’t just be this.
 
-So today, as you step into your 18th year 🎉, remember this: your life is just beginning. New dreams are waiting for you, new adventures are coming, and a beautiful future is slowly being written. No matter how many challenges come our way, I will always stand beside you, choosing you again and again. Because you are not just someone I love — you are the person who changed my heart, my life, and my future 💖.
+So today, as you step into your 18th year 🎉, remember this: your life is just beginning.
 
 Happy 18th Birthday, Aarthi 🎂✨. No matter how many years pass, I will always remember the exact moment at 4:10 PM when I first saw you… the moment my world quietly changed forever`;
+
 let i=0
 
 function typeWriter(){
-
+if(i===0){
+document.getElementById("typeText").innerHTML=""
+}
 if(i<story.length){
 document.getElementById("typeText").innerHTML+=story.charAt(i)
 i++
 setTimeout(typeWriter,40)
 }
-
 }
 
-
-
-
-
-/* HEART ANIMATION */
-
 function createHeart(){
-
 let heart=document.createElement("div")
-
 heart.classList.add("heart")
-
 heart.innerHTML="❤"
-
 heart.style.left=Math.random()*100+"vw"
-
 heart.style.fontSize=Math.random()*20+10+"px"
-
 document.body.appendChild(heart)
-
 setTimeout(()=>{heart.remove()},6000)
-
 }
 
 setInterval(createHeart,400)
@@ -444,7 +355,6 @@ setInterval(createHeart,400)
 </script>
 
 </body>
-
 </html>
 
 
